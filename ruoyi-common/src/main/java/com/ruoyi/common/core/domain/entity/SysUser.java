@@ -14,7 +14,7 @@ import com.ruoyi.common.core.domain.BaseEntity;
 
 /**
  * 用户对象 sys_user
- * 
+ *
  * @author ruoyi
  */
 public class SysUser extends BaseEntity
@@ -63,6 +63,9 @@ public class SysUser extends BaseEntity
 
     /** 密码 */
     private String password;
+
+    private String teamName;
+    private String wfmName;
 
     /** 盐加密 */
     private String salt;
@@ -349,6 +352,22 @@ public class SysUser extends BaseEntity
     public void setPostIds(Long[] postIds)
     {
         this.postIds = postIds;
+    }
+
+    public String getTeamName() {
+        return teamName;
+    }
+
+    public void setTeamName(String teamName) {
+        this.teamName = teamName;
+    }
+
+    public String getWfmName() {
+        return wfmName;
+    }
+
+    public void setWfmName(String wfmName) {
+        this.wfmName = wfmName;
     }
 
     @Override

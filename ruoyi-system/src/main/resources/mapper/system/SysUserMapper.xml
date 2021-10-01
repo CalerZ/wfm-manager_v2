@@ -189,12 +189,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  		where user_id = #{userId}
 	</update>
 
- 	<insert id="insertUser" parameterType="SysUserDo" useGeneratedKeys="true" keyProperty="userId">
+ 	<insert id="insertUser" parameterType="SysUser" useGeneratedKeys="true" keyProperty="userId">
  		insert into sys_user(
  			<if test="userId != null and userId != 0">user_id,</if>
  			<if test="deptId != null and deptId != 0">dept_id,</if>
  			<if test="loginName != null and loginName != ''">login_name,</if>
  			<if test="userName != null and userName != ''">user_name,</if>
+			<if test="teamName != null and loginName != ''">team_name,</if>
+			<if test="wfmName != null and userName != ''">wfm_name,</if>
  			<if test="userType != null and userType != ''">user_type,</if>
  			<if test="email != null and email != ''">email,</if>
  			<if test="avatar != null and avatar != ''">avatar,</if>
@@ -212,6 +214,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  			<if test="deptId != null and deptId != ''">#{deptId},</if>
  			<if test="loginName != null and loginName != ''">#{loginName},</if>
  			<if test="userName != null and userName != ''">#{userName},</if>
+			<if test="teamName != null and teamName != ''">#{teamName},</if>
+			<if test="wfmName != null and wfmName != ''">#{wfmName},</if>
  			<if test="userType != null and userType != ''">#{userType},</if>
  			<if test="email != null and email != ''">#{email},</if>
  			<if test="avatar != null and avatar != ''">#{avatar},</if>

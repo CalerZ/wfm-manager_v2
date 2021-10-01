@@ -34,6 +34,9 @@ public class SysLoginController extends BaseController
     @Value("${shiro.rememberMe.enabled: false}")
     private boolean rememberMe;
 
+    @Value("${shiro.user.needPassword: false}")
+    private boolean needPassword;
+
     @Autowired
     private ConfigService configService;
 
@@ -47,6 +50,7 @@ public class SysLoginController extends BaseController
         }
         // 是否开启记住我
         mmap.put("isRemembered", rememberMe);
+        mmap.put("needPassword", needPassword);
         // 是否开启用户注册
         mmap.put("isAllowRegister", Convert.toBool(configService.getKey("sys.account.registerUser"), false));
         return "login";

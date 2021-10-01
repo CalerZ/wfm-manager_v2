@@ -1,9 +1,10 @@
 package com.ruoyi.web.controller.system;
 
 import com.ruoyi.common.core.domain.entity.SysUser;
-import com.ruoyi.common.core.domain.entity.SysUserDo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,6 +13,9 @@ import com.ruoyi.common.core.controller.BaseController;
 import com.ruoyi.common.core.domain.AjaxResult;
 import com.ruoyi.framework.shiro.service.SysRegisterService;
 import com.ruoyi.system.service.ISysConfigService;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * 注册验证
@@ -27,9 +31,13 @@ public class SysRegisterController extends BaseController
     @Autowired
     private ISysConfigService configService;
 
+    @Value("${shiro.user.needPassword: false}")
+    private boolean needPassword;
+
     @GetMapping("/register")
-    public String register()
+    public String register(HttpServletRequest request, HttpServletResponse response, ModelMap mmap)
     {
+        mmap.put("needPassword", needPassword);
         return "register";
     }
 

@@ -1,7 +1,6 @@
 package com.ruoyi.framework.shiro.service;
 
 import com.ruoyi.common.core.domain.entity.SysUser;
-import com.ruoyi.common.core.domain.entity.SysUserDo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
@@ -35,7 +34,7 @@ public class SysRegisterService
      */
     public String register(SysUser user)
     {
-        String msg = "", loginName = user.getLoginName(), password = user.getPassword();
+        String msg = "", loginName = user.getLoginName(), password = user.getPassword(),teamName = user.getTeamName(),wfmName = user.getWfmName();
 
         if (!StringUtils.isEmpty(ServletUtils.getRequest().getAttribute(ShiroConstants.CURRENT_CAPTCHA)))
         {
@@ -45,15 +44,15 @@ public class SysRegisterService
         {
             msg = "用户名不能为空";
         }
-        else if (StringUtils.isEmpty(password))
-        {
-            msg = "用户密码不能为空";
-        }
-        else if (password.length() < UserConstants.PASSWORD_MIN_LENGTH
-                || password.length() > UserConstants.PASSWORD_MAX_LENGTH)
-        {
-            msg = "密码长度必须在5到20个字符之间";
-        }
+//        else if (StringUtils.isEmpty(password))
+//        {
+//            msg = "用户密码不能为空";
+//        }
+//        else if (password.length() < UserConstants.PASSWORD_MIN_LENGTH
+//                || password.length() > UserConstants.PASSWORD_MAX_LENGTH)
+//        {
+//            msg = "密码长度必须在5到20个字符之间";
+//        }
         else if (loginName.length() < UserConstants.USERNAME_MIN_LENGTH
                 || loginName.length() > UserConstants.USERNAME_MAX_LENGTH)
         {
@@ -65,10 +64,10 @@ public class SysRegisterService
         }
         else
         {
-            user.setPwdUpdateDate(DateUtils.getNowDate());
+//            user.setPwdUpdateDate(DateUtils.getNowDate());
             user.setUserName(loginName);
             user.setSalt(ShiroUtils.randomSalt());
-            user.setPassword(passwordService.encryptPassword(user.getLoginName(), user.getPassword(), user.getSalt()));
+//            user.setPassword(passwordService.encryptPassword(user.getLoginName(), user.getPassword(), user.getSalt()));
             boolean regFlag = userService.registerUser(user);
             if (!regFlag)
             {

@@ -1,4 +1,4 @@
-
+var needPassword = [[$(needPassword)]]
 $(function() {
     validateRule();
     $('.imgcode').click(function() {
@@ -17,6 +17,8 @@ function register() {
     $.modal.loading($("#btnSubmit").data("loading"));
     var username = $.common.trim($("input[name='username']").val());
     var password = $.common.trim($("input[name='password']").val());
+    var teamname = $.common.trim($("input[name='teamname']").val());
+    var wfmname = $.common.trim($("input[name='wfmname']").val());
     var validateCode = $("input[name='validateCode']").val();
     $.ajax({
         type: "post",
@@ -24,7 +26,9 @@ function register() {
         data: {
             "loginName": username,
             "password": password,
-            "validateCode": validateCode
+            "validateCode": validateCode,
+            "teamName":teamname,
+            "wfmName":wfmname
         },
         success: function(r) {
             if (r.code == web_status.SUCCESS) {
@@ -49,34 +53,97 @@ function register() {
 
 function validateRule() {
     var icon = "<i class='fa fa-times-circle'></i> ";
-    $("#registerForm").validate({
-        rules: {
-            username: {
-                required: true,
-                minlength: 2
+    var validateJson = {}
+    if(needPassword){
+        validateJson = {
+            rules: {
+                username: {
+                    required: true,
+                    email:true,
+                    minlength: 2
+                },
+                password: {
+                    required: true,
+                    minlength: 5
+                },
+                confirmPassword: {
+                    required: true,
+                    equalTo: "[name='password']"
+                },
+                teamname:{
+                    required: true,
+                    minlength: 2,
+                    maxlength: 100
+                },
+                wfmname:{
+                    required: true,
+                    minlength: 2,
+                    maxlength: 50
+                }
             },
-            password: {
-                required: true,
-                minlength: 5
-            },
-            confirmPassword: {
-                required: true,
-                equalTo: "[name='password']"
-            }
-        },
-        messages: {
-            username: {
-                required: icon + "请输入您的用户名",
-                minlength: icon + "用户名不能小于2个字符"
-            },
-            password: {
-            	required: icon + "请输入您的密码",
-                minlength: icon + "密码不能小于5个字符",
-            },
-            confirmPassword: {
-                required: icon + "请再次输入您的密码",
-                equalTo: icon + "两次密码输入不一致"
+            messages: {
+                username: {
+                    required: icon + "请输入您的用户名",
+                    minlength: icon + "用户名不能小于2个字符"
+                },
+                password: {
+                    required: icon + "请输入您的密码",
+                    minlength: icon + "密码不能小于5个字符",
+                },
+                confirmPassword: {
+                    required: icon + "请再次输入您的密码",
+                    equalTo: icon + "两次密码输入不一致"
+                },
+                teamname: {
+                    required: icon + "请输入您的Team名",
+                    minlength: icon + "Team名不能小于2个字符或大于100个字符",
+                    maxlength: icon + "Team名不能大于100个字符"
+                },
+                wfmname: {
+                    required: icon + "请输入您的WFM名",
+                    minlength: icon + "WFM名不能小于2个字符或大于50个字符",
+                    maxlength: icon + "WFM名不能大于50个字符"
+                }
             }
         }
-    })
+    }else{
+        validateJson= {
+            rules: {
+                username: {
+                    required: true,
+                    email:true,
+                    minlength: 2
+                },
+                teamname:{
+                    required: true,
+                    minlength: 2,
+                    maxlength: 100
+                },
+                wfmname:{
+                    required: true,
+                    minlength: 2,
+                    maxlength: 50
+                }
+            },
+            messages: {
+                username: {
+                    required: icon + "请输入您的用户名",
+                    minlength: icon + "用户名不能小于2个字符",
+                    email:"邮件格式不正确"
+                },
+                teamname: {
+                    required: icon + "请输入您的Team名",
+                    minlength: icon + "Team名不能小于2个字符或大于100个字符",
+                    maxlength: icon + "Team名不能大于100个字符"
+                },
+                wfmname: {
+                    required: icon + "请输入您的WFM名",
+                    minlength: icon + "WFM名不能小于2个字符或大于50个字符",
+                    maxlength: icon + "WFM名不能大于50个字符"
+                }
+            }
+        }
+    }
+
+    $("#registerForm").validate(validateJson)
 }

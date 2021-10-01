@@ -1,4 +1,4 @@
-
+var needPassword = [[$(needPassword)]]
 $(function() {
     validateKickout();
     validateRule();
@@ -20,6 +20,7 @@ function login() {
     var password = $.common.trim($("input[name='password']").val());
     var validateCode = $("input[name='validateCode']").val();
     var rememberMe = $("input[name='rememberme']").is(':checked');
+
     $.ajax({
         type: "post",
         url: ctx + "login",
@@ -47,15 +48,17 @@ function validateRule() {
     $("#signupForm").validate({
         rules: {
             username: {
-                required: true
+                required: true,
+                email:true,
             },
             password: {
-                required: true
+                required: needPassword
             }
         },
         messages: {
             username: {
                 required: icon + "请输入您的用户名",
+                email:"邮件格式不正确"
             },
             password: {
                 required: icon + "请输入您的密码",

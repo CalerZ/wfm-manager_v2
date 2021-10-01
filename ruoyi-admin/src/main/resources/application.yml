@@ -98,6 +98,8 @@ shiro:
     captchaEnabled: false
     # 验证码类型 math 数组计算 char 字符
     captchaType: math
+#    是否需要密码
+    needPassword: false
   cookie:
     # 设置Cookie的域名 默认空，即当前访问的域名
     domain:
