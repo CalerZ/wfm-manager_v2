@@ -39,6 +39,25 @@
     | wfm分组
     | team爬虫
 
+UI显示
+1.wfm列表
+    wfm名称 类型 后台build 后台build号 前台build 前台啊build号 owner 状态，最后更新时间
+    kangle-zhao
+    |列表中操作
+        |批量k8s start/stop/extend
+        |批量backend start/stop/restart
+    |详情页中显示
+        |wfm名称
+        |前后台状态（详细状态）
+        |k8s操作(可配置按钮)
+        |后台操作(可配置按钮)
+        |重要属性
+        |build 信息
+        |命令信息
+        |设置信息
+        |附加信息
+
+
 **********************************
 一键式操作
 **********************************

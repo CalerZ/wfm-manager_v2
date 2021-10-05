@@ -36,7 +36,7 @@
             <div class="col-sm-5">
                 <form id="signupForm" autocomplete="off">
                     <h4 class="no-margins">登录：</h4>
-                    <input type="text"     name="username" class="form-control uname"     placeholder="用户名" value=""    />
+                    <input type="text"     name="username" class="form-control uname"   th:value="${username}" th:disabled="${username!=''}" placeholder="用户名" value=""    />
                     <div th:if="${needPassword==true}">
                         <input type="password" name="password" class="form-control pword"     placeholder="密码"   value="" />
                     </div>
@@ -72,5 +72,11 @@
 <script src="../static/ajax/libs/blockUI/jquery.blockUI.js" th:src="@{/ajax/libs/blockUI/jquery.blockUI.js}"></script>
 <script src="../static/ruoyi/js/ry-ui.js" th:src="@{/ruoyi/js/ry-ui.js?v=4.7.0}"></script>
 <script src="../static/ruoyi/login.js" th:inline="javascript" th:src="@{/ruoyi/login.js}"></script>
+    <script th:inline="javascript">
+
+        var isNeedPassword = [[${needPassword}]]
+        console.log(isNeedPassword)
+
+    </script>
 </body>
 </html>

@@ -44,7 +44,7 @@
                 </div>
             </div>
         </div>
-        
+
         <div class="col-sm-9 about">
             <div class="ibox float-e-margins">
                 <div class="ibox-title ibox-title-gray dashboard-header">
@@ -65,32 +65,20 @@
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">用户名称：</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" name="userName" th:field="*{userName}" placeholder="请输入用户名称">
+                                            <input type="text" class="form-control" disabled name="userName" th:field="*{userName}" placeholder="请输入用户名称">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">token1：</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" maxlength="50" class="form-control" name="email" th:field="*{token1}" placeholder="token1">
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-sm-2 control-label">手机号码：</label>
+                                        <label class="col-sm-2 control-label">token2：</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" name="phonenumber" maxlength="11" th:field="*{phonenumber}" placeholder="请输入手机号码">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label">邮箱：</label>
-                                        <div class="col-sm-10">
-                                            <input type="text" maxlength="50" class="form-control" name="email" th:field="*{email}" placeholder="请输入邮箱">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label">性别：</label>
-                                        <div class="col-sm-10">
-                                            <div class="radio-box">
-												<input type="radio" id="radio1" th:field="*{sex}" name="sex" value="0">
-												<label for="radio1">男</label>
-											</div>
-											<div class="radio-box">
-												<input type="radio" id="radio2" th:field="*{sex}" name="sex" value="1">
-												<label for="radio2">女</label>
-											</div>
+                                            <input type="text" maxlength="50" class="form-control" name="email" th:field="*{token2}" placeholder="token2">
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -101,7 +89,7 @@
                                     </div>
                                 </form>
                             </div>
-                            
+
                             <!--修改密码-->
                             <div class="tab-pane" id="modify_password">
                                 <form class="form-horizontal" id="form-user-resetPwd">
@@ -115,7 +103,7 @@
                                         <label class="col-sm-2 control-label">新密码：</label>
                                         <div class="col-sm-10">
                                             <input type="password" class="form-control" name="newPassword" id="newPassword" placeholder="请输入新密码">
-                                            <th:block th:with="chrtype=${@config.getKey('sys.account.chrtype')}"> 
+                                            <th:block th:with="chrtype=${@config.getKey('sys.account.chrtype')}">
 						                        <th:block th:if="${chrtype != '0'}">
 						                            <span class="help-block m-b-none">
 								                        <th:block th:if="${chrtype == '1'}"><i class="fa fa-info-circle" style="color: red;"></i>  密码只能为0-9数字 </th:block>
@@ -148,7 +136,7 @@
         </div>
     </div>
 	</section>
-    
+
     <th:block th:include="include :: footer" />
     <script>
 	    /*用户管理-头像*/
@@ -239,13 +227,13 @@
 		    },
 		    focusCleanup: true
 		});
-		
+
 		function submitUserInfo() {
 	        if ($.validate.form()) {
 	        	$.operate.saveModal(ctx + "system/user/profile/update", $('#form-user-edit').serialize());
 	        }
 	    }
-	    
+
 	    /*用户管理-修改密码*/
 	    $("#form-user-resetPwd").validate({
 	    	onkeyup: false,
@@ -291,7 +279,7 @@
 	        },
 	        focusCleanup: true
 		});
-		
+
 		function submitChangPassword () {
 			var chrtype = [[${#strings.defaultString(@config.getKey('sys.account.chrtype'), 0)}]];
 			var password = $("#newPassword").val();

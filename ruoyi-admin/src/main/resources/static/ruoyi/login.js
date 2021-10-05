@@ -1,4 +1,4 @@
-var needPassword = [[$(needPassword)]]
+
 $(function() {
     validateKickout();
     validateRule();
@@ -49,10 +49,10 @@ function validateRule() {
         rules: {
             username: {
                 required: true,
-                email:true,
+                email:!isNeedPassword,
             },
             password: {
-                required: needPassword
+                required: isNeedPassword
             }
         },
         messages: {

@@ -20,6 +20,8 @@ import com.ruoyi.common.utils.ServletUtils;
 import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.framework.web.service.ConfigService;
 
+import java.util.Map;
+
 /**
  * 登录验证
  *
@@ -50,7 +52,14 @@ public class SysLoginController extends BaseController
         }
         // 是否开启记住我
         mmap.put("isRemembered", rememberMe);
-        mmap.put("needPassword", needPassword);
+        String support = request.getParameter("support");
+        if("admin".equals(support)){
+            mmap.put("needPassword", true);
+            mmap.put("username","admin");
+        }else {
+            mmap.put("needPassword", needPassword);
+            mmap.put("username","");
+        }
         // 是否开启用户注册
         mmap.put("isAllowRegister", Convert.toBool(configService.getKey("sys.account.registerUser"), false));
         return "login";
