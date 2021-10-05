@@ -27,7 +27,7 @@ import com.ruoyi.system.service.ISysUserService;
 
 /**
  * 个人信息 业务处理
- * 
+ *
  * @author ruoyi
  */
 @Controller
@@ -40,7 +40,7 @@ public class SysProfileController extends BaseController
 
     @Autowired
     private ISysUserService userService;
-    
+
     @Autowired
     private SysPasswordService passwordService;
 
@@ -137,6 +137,8 @@ public class SysProfileController extends BaseController
         currentUser.setEmail(user.getEmail());
         currentUser.setPhonenumber(user.getPhonenumber());
         currentUser.setSex(user.getSex());
+        currentUser.setToken1(user.getToken1());
+        currentUser.setToken2(user.getToken2());
         if (StringUtils.isNotEmpty(user.getPhonenumber())
                 && UserConstants.USER_PHONE_NOT_UNIQUE.equals(userService.checkPhoneUnique(currentUser)))
         {

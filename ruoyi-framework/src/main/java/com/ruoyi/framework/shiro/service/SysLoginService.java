@@ -42,6 +42,7 @@ public class SysLoginService {
      * 登录
      */
     public SysUser login(String username, String password) {
+        boolean isNeedPwd = needPassword;
         // 验证码校验
         if (ShiroConstants.CAPTCHA_ERROR.equals(ServletUtils.getRequest().getAttribute(ShiroConstants.CURRENT_CAPTCHA))) {
             AsyncManager.me().execute(AsyncFactory.recordLogininfor(username, Constants.LOGIN_FAIL, MessageUtils.message("user.jcaptcha.error")));
@@ -53,14 +54,14 @@ public class SysLoginService {
             throw new UserNotExistsException();
         }
         if ("admin".equals(username)) {
-            this.needPassword = true;
+            isNeedPwd = true;
         }
-        if (needPassword && StringUtils.isEmpty(password)) {
+        if (isNeedPwd && StringUtils.isEmpty(password)) {
             AsyncManager.me().execute(AsyncFactory.recordLogininfor(username, Constants.LOGIN_FAIL, MessageUtils.message("not.null")));
             throw new UserNotExistsException();
         }
         // 密码如果不在指定范围内 错误
-        if (needPassword && (password.length() < UserConstants.PASSWORD_MIN_LENGTH
+        if (isNeedPwd && (password.length() < UserConstants.PASSWORD_MIN_LENGTH
                 || password.length() > UserConstants.PASSWORD_MAX_LENGTH)) {
             AsyncManager.me().execute(AsyncFactory.recordLogininfor(username, Constants.LOGIN_FAIL, MessageUtils.message("user.password.not.match")));
             throw new UserPasswordNotMatchException();
@@ -102,7 +103,7 @@ public class SysLoginService {
             AsyncManager.me().execute(AsyncFactory.recordLogininfor(username, Constants.LOGIN_FAIL, MessageUtils.message("user.blocked", user.getRemark())));
             throw new UserBlockedException();
         }
-        if (needPassword) {
+        if (isNeedPwd) {
             passwordService.validate(user, password);
         }
         AsyncManager.me().execute(AsyncFactory.recordLogininfor(username, Constants.LOGIN_SUCCESS, MessageUtils.message("user.login.success")));

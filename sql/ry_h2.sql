@@ -711,3 +711,7 @@ create table gen_table_column (
   update_time       datetime                                   comment '更新时间',
   primary key (column_id)
 );
+
+
+alter table sys_user add column token1 varchar(500)    default null
+alter table sys_user add column token2 varchar(500)    default null
