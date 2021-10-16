@@ -1,6 +1,7 @@
 package com.ruoyi.framework.shiro.service;
 
 import com.ruoyi.common.core.domain.entity.SysUser;
+import com.ruoyi.common.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
@@ -20,8 +21,7 @@ import com.ruoyi.wfm.service.ISysUserService;
  * @author ruoyi
  */
 @Component
-public class SysRegisterService
-{
+public class SysRegisterService {
     @Autowired
     private ISysUserService userService;
 
@@ -31,49 +31,38 @@ public class SysRegisterService
     /**
      * 注册
      */
-    public String register(SysUser user)
-    {
-        String msg = "", loginName = user.getLoginName(), password = user.getPassword(),teamName = user.getTeamName(),wfmName = user.getWfmName();
+    public String register(SysUser user) {
+        String msg = "", loginName = user.getLoginName(), password = StringUtils.isEmpty(user.getPassword()) ? "123456" : user.getPassword(), teamName = user.getTeamName(), wfmName = user.getWfmName();
 
-        if (!StringUtils.isEmpty(ServletUtils.getRequest().getAttribute(ShiroConstants.CURRENT_CAPTCHA)))
-        {
+        if (!StringUtils.isEmpty(ServletUtils.getRequest().getAttribute(ShiroConstants.CURRENT_CAPTCHA))) {
             msg = "验证码错误";
-        }
-        else if (StringUtils.isEmpty(loginName))
-        {
+        } else if (StringUtils.isEmpty(loginName)) {
             msg = "用户名不能为空";
         }
-//        else if (StringUtils.isEmpty(password))
-//        {
-//            msg = "用户密码不能为空";
-//        }
-//        else if (password.length() < UserConstants.PASSWORD_MIN_LENGTH
-//                || password.length() > UserConstants.PASSWORD_MAX_LENGTH)
-//        {
-//            msg = "密码长度必须在5到20个字符之间";
-//        }
+        else if (StringUtils.isEmpty(password))
+        {
+            msg = "用户密码不能为空";
+        }
+        else if (password.length() < UserConstants.PASSWORD_MIN_LENGTH
+                || password.length() > UserConstants.PASSWORD_MAX_LENGTH)
+        {
+            msg = "密码长度必须在5到20个字符之间";
+        }
         else if (loginName.length() < UserConstants.USERNAME_MIN_LENGTH
-                || loginName.length() > UserConstants.USERNAME_MAX_LENGTH)
-        {
+                || loginName.length() > UserConstants.USERNAME_MAX_LENGTH) {
             msg = "账户长度必须在2到20个字符之间";
-        }
-        else if (UserConstants.USER_NAME_NOT_UNIQUE.equals(userService.checkLoginNameUnique(loginName)))
-        {
+        } else if (UserConstants.USER_NAME_NOT_UNIQUE.equals(userService.checkLoginNameUnique(loginName))) {
             msg = "保存用户'" + loginName + "'失败，注册账号已存在";
-        }
-        else
-        {
-//            user.setPwdUpdateDate(DateUtils.getNowDate());
-            user.setUserName(loginName);
+        } else {
+            user.setPwdUpdateDate(DateUtils.getNowDate());
+            user.setUserName(loginName.toLowerCase().substring(0, loginName.indexOf("@")).replaceAll(".", " "));
             user.setSalt(ShiroUtils.randomSalt());
-//            user.setPassword(passwordService.encryptPassword(user.getLoginName(), user.getPassword(), user.getSalt()));
+            user.setEmail(loginName);
+            user.setPassword(passwordService.encryptPassword(user.getLoginName(),password, user.getSalt()));
             boolean regFlag = userService.registerUser(user);
-            if (!regFlag)
-            {
+            if (!regFlag) {
                 msg = "注册失败,请联系系统管理人员";
-            }
-            else
-            {
+            } else {
                 AsyncManager.me().execute(AsyncFactory.recordLogininfor(loginName, Constants.REGISTER, MessageUtils.message("user.register.success")));
             }
         }
