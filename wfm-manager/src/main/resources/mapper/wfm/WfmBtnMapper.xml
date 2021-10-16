@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.wfm.mapper.WfmBtnMapper">
+
+    <resultMap type="WfmBtn" id="WfmBtnResult">
+        <result property="id"    column="id"    />
+        <result property="name"    column="name"    />
+        <result property="type"    column="type"    />
+        <result property="origin"    column="origin"    />
+        <result property="click"    column="click"    />
+        <result property="status"    column="status"    />
+        <result property="isDisable"    column="is_disable"    />
+        <result property="order"    column="order"    />
+        <result property="wfmName"    column="wfm_name"    />
+        <result property="configId"    column="config_id"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectWfmBtnVo">
+        select id, name, type, origin, click, status, is_disable, `order`, wfm_name, config_id, update_time from wfm_btn
+    </sql>
+
+    <select id="selectWfmBtnList" parameterType="WfmBtn" resultMap="WfmBtnResult">
+        <include refid="selectWfmBtnVo"/>
+        <where>
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="type != null  and type != ''"> and type = #{type}</if>
+            <if test="origin != null  and origin != ''"> and origin = #{origin}</if>
+            <if test="click != null  and click != ''"> and click = #{click}</if>
+            <if test="status != null  and status != ''"> and status = #{status}</if>
+            <if test="isDisable != null "> and is_disable = #{isDisable}</if>
+            <if test="order != null "> and `order` = #{order}</if>
+            <if test="wfmName != null  and wfmName != ''"> and wfm_name like concat('%', #{wfmName}, '%')</if>
+            <if test="configId != null "> and config_id = #{configId}</if>
+        </where>
+    </select>
+
+    <select id="selectWfmBtnById" parameterType="Long" resultMap="WfmBtnResult">
+        <include refid="selectWfmBtnVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertWfmBtn" parameterType="WfmBtn" useGeneratedKeys="true" keyProperty="id">
+        insert into wfm_btn
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">name,</if>
+            <if test="type != null and type != ''">type,</if>
+            <if test="origin != null and origin != ''">origin,</if>
+            <if test="click != null">click,</if>
+            <if test="status != null">status,</if>
+            <if test="isDisable != null">is_disable,</if>
+            <if test="order != null">`order`,</if>
+            <if test="wfmName != null">wfm_name,</if>
+            <if test="configId != null">config_id,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">#{name},</if>
+            <if test="type != null and type != ''">#{type},</if>
+            <if test="origin != null and origin != ''">#{origin},</if>
+            <if test="click != null">#{click},</if>
+            <if test="status != null">#{status},</if>
+            <if test="isDisable != null">#{isDisable},</if>
+            <if test="order != null">#{order},</if>
+            <if test="wfmName != null">#{wfmName},</if>
+            <if test="configId != null">#{configId},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateWfmBtn" parameterType="WfmBtn">
+        update wfm_btn
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null and name != ''">name = #{name},</if>
+            <if test="type != null and type != ''">type = #{type},</if>
+            <if test="origin != null and origin != ''">origin = #{origin},</if>
+            <if test="click != null">click = #{click},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="isDisable != null">is_disable = #{isDisable},</if>
+            <if test="order != null">`order` = #{order},</if>
+            <if test="wfmName != null">wfm_name = #{wfmName},</if>
+            <if test="configId != null">config_id = #{configId},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteWfmBtnById" parameterType="Long">
+        delete from wfm_btn where id = #{id}
+    </delete>
+
+    <delete id="deleteWfmBtnByIds" parameterType="String">
+        delete from wfm_btn where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>

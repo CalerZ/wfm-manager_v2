@@ -134,7 +134,7 @@ public class SysIndexController extends BaseController
         if("admin".equals(getLoginName())){
             return "main_admin";
         }else{
-            return "wfm/list";
+            return "wfm/favorite_list";
         }
 
     }

@@ -36,9 +36,6 @@
 			<a class="btn btn-danger multiple " onclick="$.operate.removeAll()">
 				<i class="fa fa-remove"></i> delete
 			</a>
-			<a class="btn  btn-default multiple " onclick="$.operate.edit()">
-				收藏
-			</a>
 		</div>
 		<div class="col-sm-12 select-table table-striped">
 			<table id="bootstrap-table"></table>
@@ -52,7 +49,7 @@
 
 	$(function() {
 		var options = {
-			url: prefix + "/list",
+			url: prefix + "/favorite/list",
 			detailUrl: prefix + "/{id}",
 			modalName: "wfm管理",
 			columns: [{

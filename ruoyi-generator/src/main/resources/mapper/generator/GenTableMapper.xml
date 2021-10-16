@@ -84,8 +84,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 
 	<select id="selectDbTableListByNames" resultMap="GenTableResult">
-		select table_name, table_comment, create_time, update_time from information_schema.tables
-		where table_name NOT LIKE 'qrtz_%' and table_name NOT LIKE 'gen_%' and table_schema = (select database())
+		select table_name, '' table_comment, sysdate() create_time, sysdate() update_time from information_schema.tables
+		where table_name NOT LIKE 'qrtz_%' and table_name NOT LIKE 'gen_%' and table_catalog = (select database())
 		and table_name in
 	    <foreach collection="array" item="name" open="(" separator="," close=")">
  			#{name}
@@ -93,8 +93,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 
 	<select id="selectTableByName" parameterType="String" resultMap="GenTableResult">
-		select table_name, table_comment, create_time, update_time from information_schema.tables
-		where table_comment <![CDATA[ <> ]]> '' and table_schema = (select database())
+		select table_name, '' table_comment, sysdate() create_time, sysdate() update_time from information_schema.tables
+		where  table_catalog = (select database())
 		and table_name = #{tableName}
 	</select>
 

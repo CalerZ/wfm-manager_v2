@@ -1,4 +1,4 @@
-package com.ruoyi.web.controller.system;
+package com.ruoyi.web.controller.wfm;
 
 import java.util.List;
 
@@ -27,34 +27,70 @@ import com.ruoyi.common.core.page.TableDataInfo;
  */
 @Controller
 @RequestMapping("/wfm")
-public class WfmDetailController extends BaseController
-{
-    private String prefix = "wfm/";
+public class WfmDetailController extends BaseController {
+    private String prefix = "wfm";
 
     @Autowired
     private IWfmDetailService wfmDetailService;
 
+    @GetMapping("/list")
+    public String allList() {
+        return prefix + "/list";
+    }
+
     /**
      * 查询wfm_detail列表
      */
-//    @RequiresPermissions("system:detail:list")
     @PostMapping("/list")
     @ResponseBody
-    public TableDataInfo list(WfmDetail wfmDetail)
-    {
+    public TableDataInfo list(WfmDetail wfmDetail) {
         startPage();
         List<WfmDetail> list = wfmDetailService.selectWfmDetailList(wfmDetail);
         return getDataTable(list);
     }
 
+    /**
+     * 查询wfm_detail列表
+     */
+    @PostMapping("/favorite/list")
+    @ResponseBody
+    public TableDataInfo favoriteList(WfmDetail wfmDetail) {
+        startPage();
+        List<WfmDetail> list = wfmDetailService.selectWfmDetailList(wfmDetail);
+        return getDataTable(list);
+    }
 
     /**
-     * wfm_detail
+     * 添加到收藏
+     */
+    @PostMapping("/favorite/adds")
+    @ResponseBody
+    public TableDataInfo addFavorite(WfmDetail wfmDetail) {
+        startPage();
+        List<WfmDetail> list = wfmDetailService.selectWfmDetailList(wfmDetail);
+        return getDataTable(list);
+    }
+
+    /**
+     * 从收藏移除
+     */
+    @PostMapping("/favorite/removes")
+    @ResponseBody
+    public TableDataInfo removeFavorite(WfmDetail wfmDetail) {
+        startPage();
+        List<WfmDetail> list = wfmDetailService.selectWfmDetailList(wfmDetail);
+        return getDataTable(list);
+    }
+
+    /**
+     * 查看详情
      */
     @GetMapping("/{id}")
-    public String detail(@PathVariable("id") Long id, ModelMap mmap)
-    {
+    public String detail(@PathVariable("id") Long id, ModelMap mmap) {
         WfmDetail wfmDetail = wfmDetailService.selectWfmDetailById(id);
+        mmap.put("status",new Object());
+        mmap.put("buttons",new Object());
+        mmap.put("tabs",new Object());
         mmap.put("wfmDetail", wfmDetail);
         return prefix + "/detail";
     }

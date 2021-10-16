@@ -731,3 +731,27 @@ CREATE TABLE `wfm_detial` (
   `update_time` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) DEFAULT CHARSET=utf8 COMMENT='wfm_detial';
+
+CREATE TABLE `wfm_btn` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) NOT NULL,
+  `type` varchar(50) NOT NULL,
+  `origin` varchar(50) NOT NULL,
+  `click` varchar(50) DEFAULT NULL,
+  `status` varchar(50) DEFAULT NULL,
+  `is_disable` integer DEFAULT 1,
+  `order` integer DEFAULT NULL,
+  `wfm_name` varchar(50) DEFAULT NULL,
+  `config_id` bigint(20) DEFAULT NULL,
+  `update_time` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) DEFAULT CHARSET=utf8 COMMENT='wfm_btn';
+
+
+CREATE TABLE `wfm_btn_config` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) NOT NULL,
+  `context` text NOT NULL,
+  `update_time` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) DEFAULT CHARSET=utf8 COMMENT='wfm_btn_config';

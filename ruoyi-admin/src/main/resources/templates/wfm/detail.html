@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <th:block th:include="include :: header('${wfmDetail.w
-    fmName}')"/>
+    <th:block th:include="include :: header('${wfmDetail.wfmName}')"/>
 </head>
 <body class="white-bg">
 <div class="wrapper wrapper-content animated fadeInRight ibox-content">
@@ -21,6 +20,11 @@
         </div>
     </div>
     <div class="row">
+        <div>
+            <button type="button"  class="btn btn-outline btn-default">自定义按钮</button>
+        </div>
+    </div>
+    <div class="row">
         <div class="col-sm-24">
             <div class="tabs-container">
                 <ul class="nav nav-tabs">
@@ -31,6 +35,8 @@
                     <li class=""><a data-toggle="tab" href="#tab-3" aria-expanded="false">附加信息</a>
                     </li>
                     <li class=""><a data-toggle="tab" href="#tab-4" aria-expanded="false">常用命令</a>
+                    </li>
+                    <li class=""><a data-toggle="tab" href="#tab-5" aria-expanded="false">定时管理</a>
                     </li>
                 </ul>
                 <div class="tab-content">
@@ -51,9 +57,11 @@
                         <div class="panel-body">
                         </div>
                     </div>
+                    <div id="tab-5" class="tab-pane">
+                        <div class="panel-body">
+                        </div>
+                    </div>
                 </div>
-
-
             </div>
         </div>
 

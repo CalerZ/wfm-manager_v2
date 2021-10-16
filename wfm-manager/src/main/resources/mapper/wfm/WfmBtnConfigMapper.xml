@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.wfm.mapper.WfmBtnConfigMapper">
+
+    <resultMap type="WfmBtnConfig" id="WfmBtnConfigResult">
+        <result property="id"    column="id"    />
+        <result property="name"    column="name"    />
+        <result property="context"    column="context"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectWfmBtnConfigVo">
+        select id, name, context, update_time from wfm_btn_config
+    </sql>
+
+    <select id="selectWfmBtnConfigList" parameterType="WfmBtnConfig" resultMap="WfmBtnConfigResult">
+        <include refid="selectWfmBtnConfigVo"/>
+        <where>
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="context != null  and context != ''"> and context = #{context}</if>
+        </where>
+    </select>
+
+    <select id="selectWfmBtnConfigById" parameterType="Long" resultMap="WfmBtnConfigResult">
+        <include refid="selectWfmBtnConfigVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertWfmBtnConfig" parameterType="WfmBtnConfig" useGeneratedKeys="true" keyProperty="id">
+        insert into wfm_btn_config
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">name,</if>
+            <if test="context != null and context != ''">context,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">#{name},</if>
+            <if test="context != null and context != ''">#{context},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateWfmBtnConfig" parameterType="WfmBtnConfig">
+        update wfm_btn_config
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null and name != ''">name = #{name},</if>
+            <if test="context != null and context != ''">context = #{context},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteWfmBtnConfigById" parameterType="Long">
+        delete from wfm_btn_config where id = #{id}
+    </delete>
+
+    <delete id="deleteWfmBtnConfigByIds" parameterType="String">
+        delete from wfm_btn_config where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>

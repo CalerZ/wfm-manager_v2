@@ -16,7 +16,7 @@
         |操作别人的wfm行为：(kangle.zhao创建yi-hu的wfm，是没有权限的，所以只能用yi.hu的邮箱登录操作；
                             那我自己用yi.hu邮箱登录操作{前提需要他自己配置token1，token2}，这样子可以实现任何人创建wfm)
         |操作team的wfm行为：登录的邮箱+配置的token
-    | rebuild db *可配置按钮
+    | rebuild db
         |操作自己的wfm db行为：登录的邮箱+配置的token2
         |操作别人的wfm db行为：登录的邮箱+配置的token2
         |操作team的wfm db行为：登录的邮箱+配置的token2
@@ -44,13 +44,13 @@ UI显示
     wfm名称 类型 后台build 后台build号 前台build 前台啊build号 owner 状态，最后更新时间
     kangle-zhao
     |列表中操作
-        |批量k8s start/stop/extend
-        |批量backend start/stop/restart
+        |批量k8s start/stop/extend/delete
+        |backend start/stop/restart
     |详情页中显示
         |wfm名称
         |前后台状态（详细状态）
-        |k8s操作(可配置按钮)
-        |后台操作(可配置按钮)
+        |k8s操作(基本操作 和 可配置按钮)
+        |后台操作
         |重要属性
         |build 信息
         |命令信息
