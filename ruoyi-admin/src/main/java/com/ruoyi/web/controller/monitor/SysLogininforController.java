@@ -15,12 +15,12 @@ import com.ruoyi.common.core.domain.AjaxResult;
 import com.ruoyi.common.core.page.TableDataInfo;
 import com.ruoyi.common.enums.BusinessType;
 import com.ruoyi.common.utils.poi.ExcelUtil;
-import com.ruoyi.system.domain.SysLogininfor;
-import com.ruoyi.system.service.ISysLogininforService;
+import com.ruoyi.wfm.domain.SysLogininfor;
+import com.ruoyi.wfm.service.ISysLogininforService;
 
 /**
  * 系统访问记录
- * 
+ *
  * @author ruoyi
  */
 @Controller
@@ -71,7 +71,7 @@ public class SysLogininforController extends BaseController
     {
         return toAjax(logininforService.deleteLogininforByIds(ids));
     }
-    
+
     @RequiresPermissions("monitor:logininfor:remove")
     @Log(title = "登录日志", businessType = BusinessType.CLEAN)
     @PostMapping("/clean")

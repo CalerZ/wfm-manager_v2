@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:include="include :: header('${wfmDetail.w
+    fmName}')"/>
+</head>
+<body class="white-bg">
+<div class="wrapper wrapper-content animated fadeInRight ibox-content">
+    <div class="row">
+        <div th:text="${wfmDetail.wfmName}"></div>
+    </div>
+    <div class="row">
+        <p><span class="badge">后台状态</span></p>
+        <p><span class="badge badge-primary">前台状态</span></p>
+        <p>详细情况</p>
+    </div>
+    <div class="row">
+        <div>
+            <button type="button"  class="btn btn-outline btn-default">默认</button>
+            <button type="button" class="btn btn-outline btn-danger">危险</button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-24">
+            <div class="tabs-container">
+                <ul class="nav nav-tabs">
+                    <li class="active"><a data-toggle="tab" href="#tab-1" aria-expanded="true"> 基本信息</a>
+                    </li>
+                    <li class=""><a data-toggle="tab" href="#tab-2" aria-expanded="false">build信息</a>
+                    </li>
+                    <li class=""><a data-toggle="tab" href="#tab-3" aria-expanded="false">附加信息</a>
+                    </li>
+                    <li class=""><a data-toggle="tab" href="#tab-4" aria-expanded="false">常用命令</a>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <div id="tab-1" class="tab-pane active">
+                        <div class="panel-body">
+
+                        </div>
+                    </div>
+                    <div id="tab-2" class="tab-pane">
+                        <div class="panel-body">
+                        </div>
+                    </div>
+                    <div id="tab-3" class="tab-pane">
+                        <div class="panel-body">
+                        </div>
+                    </div>
+                    <div id="tab-4" class="tab-pane">
+                        <div class="panel-body">
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+
+    </div>
+</div>
+<th:block th:include="include :: footer"/>
+<script th:inline="javascript">
+    var prefix = ctx + "system/detail";
+    $("#form-detail-edit").validate({
+        focusCleanup: true
+    });
+
+    function submitHandler() {
+        if ($.validate.form()) {
+            $.operate.save(prefix + "/edit", $('#form-detail-edit').serialize());
+        }
+    }
+</script>
+</body>
+</html>

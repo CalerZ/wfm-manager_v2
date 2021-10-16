@@ -14,11 +14,11 @@ import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.common.utils.spring.SpringUtils;
 import com.ruoyi.framework.manager.AsyncManager;
 import com.ruoyi.framework.manager.factory.AsyncFactory;
-import com.ruoyi.system.service.ISysUserOnlineService;
+import com.ruoyi.wfm.service.ISysUserOnlineService;
 
 /**
  * 退出过滤器
- * 
+ *
  * @author ruoyi
  */
 public class LogoutFilter extends org.apache.shiro.web.filter.authc.LogoutFilter

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.wfm.mapper.WfmDetailMapper">
+
+    <resultMap type="WfmDetail" id="WfmDetailResult">
+        <result property="id"    column="id"    />
+        <result property="wfmName"    column="wfm_name"    />
+        <result property="wfmType"    column="wfm_type"    />
+        <result property="backend"    column="backend"    />
+        <result property="backendBuild"    column="backend_build"    />
+        <result property="frontend"    column="frontend"    />
+        <result property="frontendBuild"    column="frontend_build"    />
+        <result property="ownerEmail"    column="owner_email"    />
+        <result property="status"    column="status"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectWfmDetailVo">
+        select id, wfm_name, wfm_type, backend, backend_build, frontend, frontend_build, owner_email, status, update_time from wfm_detail
+    </sql>
+
+    <select id="selectWfmDetailList" parameterType="WfmDetail" resultMap="WfmDetailResult">
+        <include refid="selectWfmDetailVo"/>
+        <where>
+            <if test="wfmName != null  and wfmName != ''"> and wfm_name like concat('%', #{wfmName}, '%')</if>
+            <if test="wfmType != null  and wfmType != ''"> and wfm_type = #{wfmType}</if>
+            <if test="backend != null  and backend != ''"> and backend = #{backend}</if>
+            <if test="backendBuild != null  and backendBuild != ''"> and backend_build = #{backendBuild}</if>
+            <if test="frontend != null  and frontend != ''"> and frontend = #{frontend}</if>
+            <if test="frontendBuild != null  and frontendBuild != ''"> and frontend_build = #{frontendBuild}</if>
+            <if test="ownerEmail != null  and ownerEmail != ''"> and owner_email = #{ownerEmail}</if>
+            <if test="status != null  and status != ''"> and status = #{status}</if>
+        </where>
+    </select>
+
+    <select id="selectWfmDetailById" parameterType="Long" resultMap="WfmDetailResult">
+        <include refid="selectWfmDetailVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertWfmDetail" parameterType="WfmDetail" useGeneratedKeys="true" keyProperty="id">
+        insert into wfm_detail
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="wfmName != null and wfmName != ''">wfm_name,</if>
+            <if test="wfmType != null and wfmType != ''">wfm_type,</if>
+            <if test="backend != null">backend,</if>
+            <if test="backendBuild != null">backend_build,</if>
+            <if test="frontend != null">frontend,</if>
+            <if test="frontendBuild != null">frontend_build,</if>
+            <if test="ownerEmail != null">owner_email,</if>
+            <if test="status != null">status,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="wfmName != null and wfmName != ''">#{wfmName},</if>
+            <if test="wfmType != null and wfmType != ''">#{wfmType},</if>
+            <if test="backend != null">#{backend},</if>
+            <if test="backendBuild != null">#{backendBuild},</if>
+            <if test="frontend != null">#{frontend},</if>
+            <if test="frontendBuild != null">#{frontendBuild},</if>
+            <if test="ownerEmail != null">#{ownerEmail},</if>
+            <if test="status != null">#{status},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateWfmDetail" parameterType="WfmDetail">
+        update wfm_detail
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="wfmName != null and wfmName != ''">wfm_name = #{wfmName},</if>
+            <if test="wfmType != null and wfmType != ''">wfm_type = #{wfmType},</if>
+            <if test="backend != null">backend = #{backend},</if>
+            <if test="backendBuild != null">backend_build = #{backendBuild},</if>
+            <if test="frontend != null">frontend = #{frontend},</if>
+            <if test="frontendBuild != null">frontend_build = #{frontendBuild},</if>
+            <if test="ownerEmail != null">owner_email = #{ownerEmail},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteWfmDetailById" parameterType="Long">
+        delete from wfm_detail where id = #{id}
+    </delete>
+
+    <delete id="deleteWfmDetailByIds" parameterType="String">
+        delete from wfm_detail where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>

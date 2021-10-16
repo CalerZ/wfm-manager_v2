@@ -11,17 +11,17 @@ import com.ruoyi.common.utils.ShiroUtils;
 import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.common.utils.spring.SpringUtils;
 import com.ruoyi.framework.shiro.session.OnlineSession;
-import com.ruoyi.system.domain.SysLogininfor;
-import com.ruoyi.system.domain.SysOperLog;
-import com.ruoyi.system.domain.SysUserOnline;
-import com.ruoyi.system.service.ISysOperLogService;
-import com.ruoyi.system.service.ISysUserOnlineService;
-import com.ruoyi.system.service.impl.SysLogininforServiceImpl;
+import com.ruoyi.wfm.domain.SysLogininfor;
+import com.ruoyi.wfm.domain.SysOperLog;
+import com.ruoyi.wfm.domain.SysUserOnline;
+import com.ruoyi.wfm.service.ISysOperLogService;
+import com.ruoyi.wfm.service.ISysUserOnlineService;
+import com.ruoyi.wfm.service.impl.SysLogininforServiceImpl;
 import eu.bitwalker.useragentutils.UserAgent;
 
 /**
  * 异步工厂（产生任务用）
- * 
+ *
  * @author liuhulu
  *
  */
@@ -31,7 +31,7 @@ public class AsyncFactory
 
     /**
      * 同步session到数据库
-     * 
+     *
      * @param session 在线用户会话
      * @return 任务task
      */
@@ -62,7 +62,7 @@ public class AsyncFactory
 
     /**
      * 操作日志记录
-     * 
+     *
      * @param operLog 操作日志信息
      * @return 任务task
      */
@@ -82,7 +82,7 @@ public class AsyncFactory
 
     /**
      * 记录登录信息
-     * 
+     *
      * @param username 用户名
      * @param status 状态
      * @param message 消息

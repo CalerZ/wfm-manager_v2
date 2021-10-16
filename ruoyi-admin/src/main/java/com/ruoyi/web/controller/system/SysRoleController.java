@@ -21,13 +21,13 @@ import com.ruoyi.common.core.page.TableDataInfo;
 import com.ruoyi.common.enums.BusinessType;
 import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.framework.shiro.util.AuthorizationUtils;
-import com.ruoyi.system.domain.SysUserRole;
-import com.ruoyi.system.service.ISysRoleService;
-import com.ruoyi.system.service.ISysUserService;
+import com.ruoyi.wfm.domain.SysUserRole;
+import com.ruoyi.wfm.service.ISysRoleService;
+import com.ruoyi.wfm.service.ISysUserService;
 
 /**
  * 角色信息
- * 
+ *
  * @author ruoyi
  */
 @Controller

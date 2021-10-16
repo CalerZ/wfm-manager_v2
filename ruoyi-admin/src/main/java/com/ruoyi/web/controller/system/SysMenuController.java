@@ -21,11 +21,11 @@ import com.ruoyi.common.core.domain.entity.SysRole;
 import com.ruoyi.common.enums.BusinessType;
 import com.ruoyi.common.utils.ShiroUtils;
 import com.ruoyi.framework.shiro.util.AuthorizationUtils;
-import com.ruoyi.system.service.ISysMenuService;
+import com.ruoyi.wfm.service.ISysMenuService;
 
 /**
  * 菜单信息
- * 
+ *
  * @author ruoyi
  */
 @Controller

@@ -19,12 +19,12 @@ import com.ruoyi.common.enums.OnlineStatus;
 import com.ruoyi.common.utils.ShiroUtils;
 import com.ruoyi.framework.shiro.session.OnlineSession;
 import com.ruoyi.framework.shiro.session.OnlineSessionDAO;
-import com.ruoyi.system.domain.SysUserOnline;
-import com.ruoyi.system.service.ISysUserOnlineService;
+import com.ruoyi.wfm.domain.SysUserOnline;
+import com.ruoyi.wfm.service.ISysUserOnlineService;
 
 /**
  * 在线用户监控
- * 
+ *
  * @author ruoyi
  */
 @Controller

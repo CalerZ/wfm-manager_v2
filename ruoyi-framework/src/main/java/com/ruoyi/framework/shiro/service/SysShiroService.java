@@ -6,12 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.framework.shiro.session.OnlineSession;
-import com.ruoyi.system.domain.SysUserOnline;
-import com.ruoyi.system.service.ISysUserOnlineService;
+import com.ruoyi.wfm.domain.SysUserOnline;
+import com.ruoyi.wfm.service.ISysUserOnlineService;
 
 /**
  * 会话db操作处理
- * 
+ *
  * @author ruoyi
  */
 @Component
