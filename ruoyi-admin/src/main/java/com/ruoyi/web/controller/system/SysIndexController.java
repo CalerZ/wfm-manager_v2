@@ -28,7 +28,7 @@ import com.ruoyi.system.service.ISysMenuService;
 
 /**
  * 首页 业务处理
- * 
+ *
  * @author ruoyi
  */
 @Controller
@@ -131,7 +131,12 @@ public class SysIndexController extends BaseController
     public String main(ModelMap mmap)
     {
         mmap.put("version", RuoYiConfig.getVersion());
-        return "main";
+        if("admin".equals(getLoginName())){
+            return "main_admin";
+        }else{
+            return "wfm/data";
+        }
+
     }
 
     // content-main class

@@ -715,3 +715,19 @@ create table gen_table_column (
 
 alter table sys_user add column token1 varchar(500)    default null
 alter table sys_user add column token2 varchar(500)    default null
+
+DROP TABLE IF EXISTS `wfm_detial`;
+
+CREATE TABLE `wfm_detial` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `wfm_name` varchar(100) NOT NULL,
+  `wfm_type` varchar(50) NOT NULL,
+  `backend` varchar(50) DEFAULT NULL,
+  `backend_build` varchar(50) DEFAULT NULL,
+  `frontend` varchar(50) DEFAULT NULL,
+  `frontend_build` varchar(50) DEFAULT NULL,
+  `owner_email` varchar(50) DEFAULT NULL,
+  `status` varchar(50) DEFAULT NULL,
+  `update_time` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) DEFAULT CHARSET=utf8 COMMENT='wfm_detial';

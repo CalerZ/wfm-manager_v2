@@ -1,6 +1,8 @@
 package com.ruoyi.system.service.impl;
 
 import java.util.List;
+
+import com.ruoyi.common.annotation.DataScope;
 import com.ruoyi.common.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,19 +13,19 @@ import com.ruoyi.common.core.text.Convert;
 
 /**
  * wfm_detialService业务层处理
- * 
+ *
  * @author ruoyi
  * @date 2021-09-28
  */
 @Service
-public class WfmDetialServiceImpl implements IWfmDetialService 
+public class WfmDetialServiceImpl implements IWfmDetialService
 {
     @Autowired
     private WfmDetialMapper wfmDetialMapper;
 
     /**
      * 查询wfm_detial
-     * 
+     *
      * @param id wfm_detial主键
      * @return wfm_detial
      */
@@ -35,7 +37,7 @@ public class WfmDetialServiceImpl implements IWfmDetialService
 
     /**
      * 查询wfm_detial列表
-     * 
+     *
      * @param wfmDetial wfm_detial
      * @return wfm_detial
      */
@@ -47,7 +49,7 @@ public class WfmDetialServiceImpl implements IWfmDetialService
 
     /**
      * 新增wfm_detial
-     * 
+     *
      * @param wfmDetial wfm_detial
      * @return 结果
      */
@@ -59,7 +61,7 @@ public class WfmDetialServiceImpl implements IWfmDetialService
 
     /**
      * 修改wfm_detial
-     * 
+     *
      * @param wfmDetial wfm_detial
      * @return 结果
      */
@@ -72,7 +74,7 @@ public class WfmDetialServiceImpl implements IWfmDetialService
 
     /**
      * 批量删除wfm_detial
-     * 
+     *
      * @param ids 需要删除的wfm_detial主键
      * @return 结果
      */
@@ -84,7 +86,7 @@ public class WfmDetialServiceImpl implements IWfmDetialService
 
     /**
      * 删除wfm_detial信息
-     * 
+     *
      * @param id wfm_detial主键
      * @return 结果
      */

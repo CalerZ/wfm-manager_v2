@@ -34,17 +34,17 @@ public class WfmDetialController extends BaseController
     @Autowired
     private IWfmDetialService wfmDetialService;
 
-    @RequiresPermissions("system:detial:view")
+//    @RequiresPermissions("system:detial:view")
     @GetMapping()
     public String detial()
     {
-        return prefix + "/detial";
+        return prefix + "/edit";
     }
 
     /**
      * 查询wfm_detial列表
      */
-    @RequiresPermissions("system:detial:list")
+//    @RequiresPermissions("system:detial:list")
     @PostMapping("/list")
     @ResponseBody
     public TableDataInfo list(WfmDetial wfmDetial)
@@ -57,7 +57,7 @@ public class WfmDetialController extends BaseController
     /**
      * 导出wfm_detial列表
      */
-    @RequiresPermissions("system:detial:export")
+//    @RequiresPermissions("system:detial:export")
     @Log(title = "wfm_detial", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     @ResponseBody
@@ -71,7 +71,7 @@ public class WfmDetialController extends BaseController
     /**
      * 新增wfm_detial
      */
-    @GetMapping("/add")
+//    @GetMapping("/add")
     public String add()
     {
         return prefix + "/add";
@@ -80,7 +80,7 @@ public class WfmDetialController extends BaseController
     /**
      * 新增保存wfm_detial
      */
-    @RequiresPermissions("system:detial:add")
+//    @RequiresPermissions("system:detial:add")
     @Log(title = "wfm_detial", businessType = BusinessType.INSERT)
     @PostMapping("/add")
     @ResponseBody
@@ -101,9 +101,20 @@ public class WfmDetialController extends BaseController
     }
 
     /**
+     * 修改wfm_detial
+     */
+    @GetMapping("/{id}")
+    public String detail(@PathVariable("id") Long id, ModelMap mmap)
+    {
+        WfmDetial wfmDetial = wfmDetialService.selectWfmDetialById(id);
+        mmap.put("wfmDetial", wfmDetial);
+        return prefix + "/edit";
+    }
+
+    /**
      * 修改保存wfm_detial
      */
-    @RequiresPermissions("system:detial:edit")
+//    @RequiresPermissions("system:detial:edit")
     @Log(title = "wfm_detial", businessType = BusinessType.UPDATE)
     @PostMapping("/edit")
     @ResponseBody
@@ -115,7 +126,7 @@ public class WfmDetialController extends BaseController
     /**
      * 删除wfm_detial
      */
-    @RequiresPermissions("system:detial:remove")
+//    @RequiresPermissions("system:detial:remove")
     @Log(title = "wfm_detial", businessType = BusinessType.DELETE)
     @PostMapping( "/remove")
     @ResponseBody
