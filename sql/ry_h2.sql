@@ -747,11 +747,17 @@ CREATE TABLE `wfm_btn` (
   PRIMARY KEY (`id`)
 ) DEFAULT CHARSET=utf8 COMMENT='wfm_btn';
 
-
+drop table if exists wfm_btn_config;
 CREATE TABLE `wfm_btn_config` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `name` varchar(100) NOT NULL,
-  `context` text NOT NULL,
+  `name` varchar(100) NOT NULL comment 'name',
+  `type` varchar(100) NOT NULL comment 'type(1:jenkins/2:command)',
+  `url` varchar(200)  comment 'url',
+  `job_name` varchar(100) comment 'job_name',
+  `token_type` varchar(10) comment 'token_type',
+  `jenkins_param` text comment 'jenkins_param',
+  `cmd_param` text comment 'cmd_param',
   `update_time` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) DEFAULT CHARSET=utf8 COMMENT='wfm_btn_config';
+
