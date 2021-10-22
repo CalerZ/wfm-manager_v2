@@ -761,3 +761,10 @@ CREATE TABLE `wfm_btn_config` (
   PRIMARY KEY (`id`)
 ) DEFAULT CHARSET=utf8 COMMENT='wfm_btn_config';
 
+DROP TABLE IF EXISTS wfm_list_favorite;
+CREATE TABLE `wfm_list_favorite` (
+  `id` BIGINT(20) NOT NULL AUTO_INCREMENT,
+  `wfm_name` VARCHAR(100) NOT NULL COMMENT 'wfm_id',
+  `wfm_id` BIGINT(20)  COMMENT 'wfm_id',
+  PRIMARY KEY (`id`)
+)
